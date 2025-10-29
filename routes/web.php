@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\SupportCalendarController;
+use App\Http\Controllers\CalendarController;
 
-Route::get('/', fn () => redirect()->route('meals.index'));
+Route::get('/', fn () => redirect()->route('calendar.index'));
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('meals', MealController::class);
@@ -23,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth','can:supporter-only'])->group(function(){
     Route::get('/support/patients/{user}/meals', [SupportController::class,'meals'])
         ->name('support.patients.meals');
+    Route::get('/support/patients/{user}/calendar', [SupportCalendarController::class,'index'])->name('support.calendar.index');
+    Route::get('/support/patients/{user}/calendar/day/{date}', [SupportCalendarController::class,'day'])->name('support.calendar.day');
 });
 
 Route::get('/dashboard', function () {
