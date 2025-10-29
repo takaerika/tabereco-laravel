@@ -6,6 +6,7 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\SupportCalendarController;
 use App\Http\Controllers\CalendarController;
 
+
 Route::get('/', fn () => redirect()->route('calendar.index'));
 
 Route::middleware(['auth'])->group(function () {
@@ -27,6 +28,8 @@ Route::middleware(['auth','can:supporter-only'])->group(function(){
         ->name('support.patients.meals');
     Route::get('/support/patients/{user}/calendar', [SupportCalendarController::class,'index'])->name('support.calendar.index');
     Route::get('/support/patients/{user}/calendar/day/{date}', [SupportCalendarController::class,'day'])->name('support.calendar.day');
+    Route::post('/meals/{meal}/comments', [CommentController::class,'store'])->name('meals.comments.store');
+    Route::delete('/meals/{meal}/comments/{comment}', [CommentController::class,'destroy'])->name('meals.comments.destroy');
 });
 
 Route::get('/dashboard', function () {
