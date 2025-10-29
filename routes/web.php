@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\SupportCalendarController;
+use App\Http\Controllers\CalendarController;
 
 Route::get('/', fn () => redirect()->route('meals.index'));
 
