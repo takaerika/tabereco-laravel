@@ -38,7 +38,14 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-
+        <div class="mt-4">
+          <x-input-label for="role" :value="'ロール（役割）'" />
+          <select id="role" name="role" class="block mt-1 w-full rounded border">
+            <option value="patient" {{ old('role')==='patient'?'selected':'' }}>患者</option>
+            <option value="supporter" {{ old('role')==='supporter'?'selected':'' }}>サポーター</option>
+          </select>
+          <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
@@ -47,14 +54,6 @@
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
-        </div>
-        <div class="mt-4">
-          <x-input-label for="role" :value="'ロール（役割）'" />
-          <select id="role" name="role" class="block mt-1 w-full rounded border">
-            <option value="patient" {{ old('role')==='patient'?'selected':'' }}>患者</option>
-            <option value="supporter" {{ old('role')==='supporter'?'selected':'' }}>サポーター</option>
-          </select>
-          <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
     </form>
 </x-guest-layout>
