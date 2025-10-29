@@ -48,5 +48,13 @@
                 {{ __('Register') }}
             </x-primary-button>
         </div>
+        <div class="mt-4">
+          <x-input-label for="role" :value="'ロール（役割）'" />
+          <select id="role" name="role" class="block mt-1 w-full rounded border">
+            <option value="patient" {{ old('role')==='patient'?'selected':'' }}>患者</option>
+            <option value="supporter" {{ old('role')==='supporter'?'selected':'' }}>サポーター</option>
+          </select>
+          <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
     </form>
 </x-guest-layout>
