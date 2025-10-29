@@ -45,4 +45,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function isPatient(): bool   { return $this->role === 'patient'; }
+    public function isSupporter(): bool { return $this->role === 'supporter'; }
 }
