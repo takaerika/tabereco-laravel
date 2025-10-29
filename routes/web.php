@@ -8,6 +8,16 @@ Route::get('/', fn () => redirect()->route('meals.index'));
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('meals', MealController::class);
+     Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'index'])
+        ->name('calendar.index');                
+    Route::get('/calendar/day/{date}', [\App\Http\Controllers\CalendarController::class, 'day'])
+        ->name('calendar.day');                
+    Route::get('/support/patients/{user}/calendar', [\App\Http\Controllers\SupportCalendarController::class, 'index'])
+        ->middleware('can:supporter-only')
+        ->name('support.calendar.index');
+    Route::get('/support/patients/{user}/calendar/day/{date}', [\App\Http\Controllers\SupportCalendarController::class, 'day'])
+        ->middleware('can:supporter-only')
+        ->name('support.calendar.day');
 });
 
 Route::middleware(['auth','can:supporter-only'])->group(function(){
